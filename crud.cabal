@@ -29,6 +29,7 @@ library
       Db
       Lib
       Server
+      Types
   other-modules:
       Paths_crud
   hs-source-dirs:

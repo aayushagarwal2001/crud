@@ -20,6 +20,8 @@ import Control.Monad.Reader
 import Data.Time (Day (ModifiedJulianDay))
 import qualified Database.Esqueleto as E
 import Control.Monad.Logger
+import Control.Monad.IO.Unlift
+import qualified Types as T
 share [mkPersist sqlSettings, mkMigrate "migrateAll"] [persistLowerCase|
 Movie
       mname String 
@@ -58,6 +60,9 @@ fetchOneByName movieName =  E.select $
                               E.where_ (movie E.^. MovieMname E.==. E.val movieName )
                               E.limit 1
                               return movie
+insertMovie :: MonadIO m => T.Movie ->ReaderT SqlBackend m (Maybe ())
+insertMovie m = do
+      insertUnique_ $ Movie (T.mname m) (T.genre m) (T.rating m)                
 
 
 -- dbConnect = do
@@ -81,3 +86,7 @@ queryExecu1 movieName = do
 
 
 
+queryExecu2 ::  T.Movie -> IO (Maybe ())
+queryExecu2 movie = do
+                    runNoLoggingT $ withPostgresqlConn "host=localhost dbname=test_db user=root password=root port=5432" (\b -> do
+                        runSqlConn (insertMovie movie) b)
