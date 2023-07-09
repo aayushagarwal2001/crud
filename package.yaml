@@ -46,7 +46,6 @@ dependencies:
 - monad-logger
 - esqueleto
 - postgresql-simple
-- unliftio-core
 ghc-options:
 - -Wall
 - -Wcompat
