@@ -21,7 +21,6 @@ import Data.Time (Day (ModifiedJulianDay))
 import qualified Database.Esqueleto as E
 import Control.Monad.Logger
 import qualified Types as T
-import Data.Set (Set)
 
 
 

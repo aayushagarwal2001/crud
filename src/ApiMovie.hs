@@ -16,8 +16,6 @@ import Servant
 import qualified Db as D
 import Database.Esqueleto (Entity(entityVal))
 import Types
-import Database.PostgreSQL.Simple.TypeInfo.Static (_daterange)
-
 
 type MovieGetAll        =  BasicAuth "foo-realm" UserForAuth :>  Get '[JSON] [Movie]
 type MovieGetByName     =  BasicAuth "foo-realm" UserForAuth :>Capture "name" String :> Get '[JSON] [Movie]

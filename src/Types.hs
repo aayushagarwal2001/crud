@@ -3,7 +3,7 @@ module Types where
 import GHC.Generics
 import Data.Aeson
 import Data.Time (Day)
-import Data.Text
+
 data Movie = Movie
   {
     mname :: String
